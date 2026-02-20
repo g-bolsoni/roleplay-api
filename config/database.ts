@@ -20,16 +20,41 @@ const databaseConfig: DatabaseConfig = {
   | file.
   |
   */
-  connection: Env.get('DB_CONNECTION'),
+  connection: Env.get('DB_CONNECTION', 'postgres'),
 
   connections: {
+    /*
+    |--------------------------------------------------------------------------
+    | PostgreSQL
+    |--------------------------------------------------------------------------
+    |
+    | Configuration for the PostgreSQL database
+    |
+    | npm i pg
+    |
+    */
+    postgres: {
+      client: 'pg',
+      connection: {
+        host: Env.get('DB_HOST'),
+        port: Env.get('DB_PORT'),
+        user: Env.get('DB_USER'),
+        password: Env.get('DB_PASSWORD'),
+        database: Env.get('DB_NAME'),
+      },
+      migrations: {
+        naturalSort: true,
+      },
+      healthCheck: false,
+      debug: false,
+    },
+
     /*
     |--------------------------------------------------------------------------
     | SQLite
     |--------------------------------------------------------------------------
     |
-    | Configuration for the SQLite database.  Make sure to install the driver
-    | from npm when using this connection
+    | Configuration for the SQLite database
     |
     | npm i sqlite3
     |
@@ -46,8 +71,7 @@ const databaseConfig: DatabaseConfig = {
       healthCheck: false,
       debug: false,
     },
-
-  }
+  },
 }
 
 export default databaseConfig

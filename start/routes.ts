@@ -4,4 +4,5 @@ Route.get('/', async () => {
   return { hello: 'world' }
 })
 
+Route.get('/users', 'UsersController.getAllUsers')
 Route.post('/users', 'UsersController.createUser')

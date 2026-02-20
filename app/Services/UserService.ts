@@ -8,10 +8,15 @@ export default class UserService {
     const existing = await userRepository.findByEmail(userData.email)
 
     if (existing) {
-      throw new UserAlreadyExistsException()
+      throw new UserAlreadyExistsException('User already exists')
     }
 
     const hashedPassword = await Hash.make(userData.password)
     return await userRepository.create({ ...userData, password: hashedPassword })
+  }
+
+  public async getUsers() {
+    const userRepository = new UserRepository()
+    return await userRepository.getAll()
   }
 }

@@ -9,7 +9,11 @@ export default class UserRepository {
     return await User.query().where('email', email).first()
   }
 
-  public async findById(id: number) {
+  public async findById(id: string) {
     return await User.find(id)
+  }
+
+  public async getAll() {
+    return await User.all()
   }
 }

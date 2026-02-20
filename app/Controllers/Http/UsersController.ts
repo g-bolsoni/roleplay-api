@@ -14,4 +14,14 @@ export default class UsersController {
       throw new Error('Validation failed')
     }
   }
+
+  public async getAllUsers({ response }: HttpContextContract) {
+    try {
+      const service = new UserService()
+      const createdUser = await service.getUsers()
+      return response.ok(createdUser)
+    } catch (error) {
+      throw new Error('Validation failed')
+    }
+  }
 }

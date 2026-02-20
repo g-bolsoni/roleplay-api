@@ -15,14 +15,19 @@
 
 import Logger from '@ioc:Adonis/Core/Logger'
 import HttpExceptionHandler from '@ioc:Adonis/Core/HttpExceptionHandler'
+import { Exception } from '@adonisjs/core/build/standalone'
 
-export class ExceptionHandler extends HttpExceptionHandler {
+export default class ExceptionHandler extends HttpExceptionHandler {
   constructor() {
     super(Logger)
   }
 }
-export class UserAlreadyExistsException extends HttpExceptionHandler {
-  constructor() {
-    super(Logger)
+
+export class UserAlreadyExistsException extends Exception {
+  public code = 'USER_ALREADY_EXISTS'
+  public status = 409
+
+  constructor(message: string) {
+    super(message)
   }
 }
