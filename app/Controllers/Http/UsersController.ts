@@ -6,22 +6,14 @@ export default class UsersController {
   public async createUser({ request, response }: HttpContextContract) {
     const userData = await request.validate(UserValidator)
 
-    try {
-      const service = new UserService()
-      const createdUser = await service.createUser(userData)
-      return response.created(createdUser)
-    } catch (error) {
-      throw new Error('Validation failed')
-    }
+    const service = new UserService()
+    const createdUser = await service.createUser(userData)
+    return response.created(createdUser)
   }
 
   public async getAllUsers({ response }: HttpContextContract) {
-    try {
-      const service = new UserService()
-      const createdUser = await service.getUsers()
-      return response.ok(createdUser)
-    } catch (error) {
-      throw new Error('Validation failed')
-    }
+    const service = new UserService()
+    const createdUser = await service.getUsers()
+    return response.ok(createdUser)
   }
 }

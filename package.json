@@ -8,6 +8,7 @@
     "dev": "bash ./scripts/dev.sh",
     "dev:server": "node ace serve --watch",
     "test": "node -r @adonisjs/assembler/build/register japaFile.ts",
+    "test:watch": "node -r @adonisjs/assembler/build/register japaFile.ts --watch",
     "lint": "eslint . --ext=.ts",
     "format": "prettier --write .",
     "migrations:create": "node ace make:migration",

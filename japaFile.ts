@@ -29,11 +29,23 @@ async function startHttpServer() {
   await new Ignitor(__dirname).httpServer().start()
 }
 
+async function beginGlobalTransaction() {
+  const Database = (await import('@ioc:Adonis/Lucid/Database')).default
+  await Database.beginGlobalTransaction()
+}
+
+async function rollbackGlobalTransaction() {
+  const Database = (await import('@ioc:Adonis/Lucid/Database')).default
+  await Database.rollbackGlobalTransaction()
+}
+
 /**
  * Configure test runner
  */
 configure({
   files: ['test/**/*.spec.ts'],
   before: [runMigrations, startHttpServer],
+  beforeEach: [beginGlobalTransaction],
+  afterEach: [rollbackGlobalTransaction],
   after: [rollbackMigrations],
-})
+} as any)
