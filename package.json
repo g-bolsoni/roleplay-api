@@ -5,11 +5,13 @@
   "scripts": {
     "build": "node ace build --production",
     "start": "node server.js",
-    "dev": "node ace serve --watch",
+    "dev": "bash ./scripts/dev.sh",
+    "dev:server": "node ace serve --watch",
     "test": "node -r @adonisjs/assembler/build/register japaFile.ts",
     "lint": "eslint . --ext=.ts",
     "format": "prettier --write .",
-    "migrations:create": "node ace make:migration"
+    "migrations:create": "node ace make:migration",
+    "migrations:run": "node ace migration:run"
   },
   "devDependencies": {
     "@adonisjs/assembler": "^5.9.6",
@@ -36,6 +38,7 @@
     "@adonisjs/repl": "^3.1.11",
     "@adonisjs/validator": "^13.0.2",
     "luxon": "^3.7.2",
+    "pg": "^8.18.0",
     "phc-argon2": "^1.1.4",
     "proxy-addr": "^2.0.7",
     "reflect-metadata": "^0.2.2",
